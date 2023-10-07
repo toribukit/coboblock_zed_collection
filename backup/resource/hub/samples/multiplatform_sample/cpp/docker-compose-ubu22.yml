@@ -1,0 +1,15 @@
+version: '2.3'
+services: 
+  multiplatform_sample:
+    build :
+        context : ./app
+        dockerfile: Dockerfile   
+        args:
+          BUILD_IMAGE: stereolabs/iot:0.72.1-devel-ubuntu22-cu11.8
+          RUNTIME_IMAGE: stereolabs/iot:0.72.1-runtime-ubuntu22-cu11.8
+    runtime: nvidia
+    environment:
+     - NVIDIA_DRIVER_CAPABILITIES=all
+     - MESA_GL_VERSION_OVERRIDE=3.3
+    privileged: true
+    network_mode: "host"
